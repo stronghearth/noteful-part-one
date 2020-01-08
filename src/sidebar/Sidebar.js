@@ -1,20 +1,22 @@
 import React from 'react'
-import sidebar from './sidebar.css'
+import './sidebar.css'
+import NavFolders from '../navfolders/NavFolders'
+import NotesNav from '../notesnav/NotesNav'
 
-function Sidebar () {
-    return <nav className="sidebar">
-            <ul>
-                <li>
-                    folder here
-                </li>
-                <li>
-                    folder there
-                </li>
-                <li>
-                    folder everywhere
-                </li>
-            </ul>
-    </nav>
+
+function Sidebar (props) {
+    if (props.location.pathname === '/') {
+        return <nav className="sidebar">
+                    <ul>
+                        <NavFolders 
+                            {...props}
+                        />
+                    </ul>
+                </nav>   
+    }
+    else {
+        return <NotesNav {...props}/>
+    }
 }
 
 export default Sidebar

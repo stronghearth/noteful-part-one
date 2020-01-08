@@ -11,11 +11,3 @@ nav.sidebar {
     align-items: flex-start;
     
 }
-
-li {
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 5px;
-    padding: 5px;
-    margin-bottom: 10px;
-}

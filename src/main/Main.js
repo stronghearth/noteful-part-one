@@ -1,16 +1,24 @@
 import React from 'react'
-import main from './main.css'
+import './main.css'
+import NotesMain from '../notesmain/NotesMain'
+import NotesExpanded from '../notesexpanded/NotesExpanded'
 
-function Main () {
+function Main (props) {
+    if (props.location.pathname === '/' || '/folder'){
     return <main>
             <nav className="mainNav">
                 <ul>
-                    <li>note here</li>
-                    <li>note there</li>
-                    <li>note everywhere</li>
+                    <NotesMain 
+                        {...props}/>
                 </ul>
             </nav>
-    </main>
+            </main>
+    }
+    else {
+        return <main>
+                    <NotesExpanded {...props}/>
+                </main>
+    }
 }
 
 export default Main

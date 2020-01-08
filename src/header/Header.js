@@ -1,9 +1,10 @@
 import React from 'react'
-import header from './header.css'
+import './header.css'
+import {Link} from 'react-router-dom'
 
 function Header () {
     return <header>
-                <h1>Noteful</h1>
+                <Link to="/"><h1>Noteful</h1></Link>
            </header>
 }
 
