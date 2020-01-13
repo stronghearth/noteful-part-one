@@ -4,7 +4,7 @@ import NotesMain from '../notesmain/NotesMain'
 import NotesExpanded from '../notesexpanded/NotesExpanded'
 
 function Main (props) {
-    if (props.location.pathname === '/' || '/folder'){
+    if (props.location.pathname === '/' || props.match.params.folderid){
     return <main>
             <nav className="mainNav">
                 <ul>
