@@ -12,6 +12,7 @@ function Sidebar (props) {
                             {...props}
                         />
                     </ul>
+                    <button type="button">Add Folder</button>
                 </nav>   
     }
     else {

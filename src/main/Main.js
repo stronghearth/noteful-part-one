@@ -11,6 +11,7 @@ function Main (props) {
                     <NotesMain 
                         {...props}/>
                 </ul>
+                <button>Add Note</button>
             </nav>
             </main>
     }

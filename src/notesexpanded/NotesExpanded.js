@@ -8,6 +8,7 @@ function NotesExpanded (props) {
                     <h2>{note.name}</h2>
                     <h4>{note.modified}</h4>
                     <p>{note.content}</p>
+                    <button type='button'>Delete</button>
                 </li>
     })
     

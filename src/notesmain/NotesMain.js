@@ -6,6 +6,7 @@ function NotesMain (props) {
     return props.notes.map(note => {
         return <li key={note.id}>
                     <NavLink to={`/note/${note.id}`}>{note.name}</NavLink>
+                    <button type='button'>Delete</button>
                 </li>
     })
     }
@@ -15,6 +16,7 @@ function NotesMain (props) {
         return newNotes.map(note => {
             return <li key={note.id}>
                         <NavLink to={`/note/${note.id}`}>{note.name}</NavLink>
+                        <button type='button'>Delete</button>
                     </li>
         })
     }
