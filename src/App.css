@@ -12,5 +12,6 @@ div.container {
     justify-content: flex-start;
     align-content: center;
     width: 100%;
+    list-style: none;
     height: 100%;
 }

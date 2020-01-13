@@ -16,7 +16,7 @@ function Main (props) {
     }
     else {
         return <main>
-                    <NotesExpanded {...props}/>
+                    <NotesExpanded {...props} notes={props.notes}/>
                 </main>
     }
 }

@@ -1,9 +1,16 @@
 import React from 'react'
 
-function NotesExpanded () {
-    return <li>
-        <p>I am an expanded note</p>
-    </li>
+function NotesExpanded (props) {
+    const currentNote = props.notes.filter(note => props.match.params.noteid === note.id);
+    console.log(currentNote)
+    return currentNote.map(note => {
+        return <li key={note.id}>
+                    <h2>{note.name}</h2>
+                    <h4>{note.modified}</h4>
+                    <p>{note.content}</p>
+                </li>
+    })
+    
 }
 
 export default NotesExpanded

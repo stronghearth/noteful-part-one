@@ -5,8 +5,8 @@ function NavFolders (props) {
     return props.folders.map(folder => {
         const folderId = props.match.params.folderid 
         return <li key={folder.id}>
-             <NavLink activeClassName= {folderId === folder.id ? "active" : "" } to={`/folder/${folder.id}`}>{folder.name}</NavLink>
-        </li>
+                    <NavLink activeClassName= {folderId === folder.id ? "active" : "" } to={`/folder/${folder.id}`}>{folder.name}</NavLink>
+                </li>
     })
 }
 

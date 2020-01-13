@@ -52,7 +52,7 @@ class App extends React.Component {
               <Route
                 exact
                 path="/note/:noteid"
-                render={props => <Main {...props} folders={this.state.folders}/>}
+                render={props => <Main {...props} notes={this.state.notes}/>}
               />
             </div>
 
