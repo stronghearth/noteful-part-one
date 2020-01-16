@@ -1,19 +1,9 @@
 import React from 'react';
 import ValidationError from '../ValidationError'
 import StateContext from '../StateContext'
-
+import "./addnote.css"
 export default class AddNote extends React.Component {
     static contextType = StateContext;
-
-    /*constructor (props) {
-        super(props);
-        this.state = {
-            note: {
-                name: "",
-                touched: false
-            }
-        }
-    }*/
 
     validateName() {
         const name = this.context.note.name;
@@ -29,7 +19,7 @@ export default class AddNote extends React.Component {
         const {handleNoteFormDesc, handleNoteFormName, handleNoteSubmit} = this.context;
         
         return (
-        <form onSubmit={(e) => handleNoteSubmit(e, this.props.match.params.folderid, new Date().toLocaleString())}>
+        <form className="addNote" onSubmit={(e) => handleNoteSubmit(e, this.props.match.params.folderid, new Date().toLocaleString())}>
             <fieldset>
                 <legend>Add Note: </legend>
                 <label htmlFor="name">Note Name: </label>
@@ -38,7 +28,7 @@ export default class AddNote extends React.Component {
                 {<ValidationError message={this.validateName()}/>}
                 <br/>
                 <label htmlFor="description">Note Description: </label>
-                <input type="textarea" name="description" onChange={(e) => handleNoteFormDesc(e.currentTarget.value)}/>
+                <textarea name="description" className="textarea" onChange={(e) => handleNoteFormDesc(e.currentTarget.value)}/>
                 <br />
                 <button type="submit">Submit</button>
             </fieldset>

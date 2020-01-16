@@ -4,7 +4,8 @@ import Header from './header/Header';
 import Main from './main/Main';
 import Sidebar from './sidebar/Sidebar';
 import { Route } from 'react-router-dom';
-import StateContext from './StateContext'
+import StateContext from './StateContext';
+import AppError from './AppError'
 
 class App extends React.Component {
   state = {
@@ -183,7 +184,12 @@ handleFolderName = (name) => {
   }
 
   render() {
-    return  <StateContext.Provider value={{
+    return  <>
+                <Header />
+
+                <AppError>
+                <div className="container">
+                  <StateContext.Provider value={{
                     folders: this.state.folders,
                     notes: this.state.notes,
                     error: this.state.error,
@@ -194,46 +200,44 @@ handleFolderName = (name) => {
                     handleNoteSubmit: this.handleNoteSubmit,
                     handleFolderName: this.handleFolderName,
                     handleFolderFormSubmit: this.handleFolderFormSubmit
-            }}>
-                <Header />
-                
-                
-                <div className="container">
-
-                  <Route 
-                    exact
-                    path ="/" 
-                    
-                    render={props => <Sidebar {...props}/>}
-                  />
-                  <Route
-                    exact
-                    path="/folder/:folderid"
-                    render={props => <Sidebar {...props} />}
-                  />
-                  <Route
-                    exact
-                    path="/note/:noteid"
-                    render={props => <Sidebar {...props} folders={this.state.folders} />}
-                  />
-                  <Route 
-                    exact
-                    path="/" 
-                    render={props => <Main {...props} error={this.state.error}/>}
-                  />
-                  <Route 
-                    exact
-                    path="/folder/:folderid"
-                    render={props => <Main {...props} error={this.state.error}/>}
-                  />
-                  <Route
-                    exact
-                    path="/note/:noteid"
-                    render={props => <Main {...props} error={this.state.error}/>}
-                  />
+                     }}>
                   
+                      <Route 
+                        exact
+                        path ="/" 
+                        
+                        render={props => <Sidebar {...props}/>}
+                      />
+                      <Route
+                        exact
+                        path="/folder/:folderid"
+                        render={props => <Sidebar {...props} />}
+                      />
+                      <Route
+                        exact
+                        path="/note/:noteid"
+                        render={props => <Sidebar {...props} />}
+                      />
+                      <Route 
+                        exact
+                        path="/" 
+                        render={props => <Main {...props}/>}
+                      />
+                      <Route 
+                        exact
+                        path="/folder/:folderid"
+                        render={props => <Main {...props}/>}
+                      />
+                      <Route
+                        exact
+                        path="/note/:noteid"
+                        render={props => <Main {...props}/>}
+                      />
+                  
+                  </StateContext.Provider>
                 </div>
-          </StateContext.Provider>
+                </AppError>
+          </>
 
   }
 }
