@@ -1,6 +1,7 @@
-import React from 'react'
-import StateContext from '../StateContext'
-import './addfolder.css'
+import React from 'react';
+import StateContext from '../StateContext';
+import PropTypes from 'prop-types';
+import './addfolder.css';
 
 export default class AddFolder extends React.Component {
     static contextType = StateContext
@@ -18,4 +19,9 @@ export default class AddFolder extends React.Component {
             </form>
         )
     }
+}
+
+AddFolder.propTypes = {
+    handleFolderFormSubmit: PropTypes.func,
+    handleFolderName: PropTypes.func
 }

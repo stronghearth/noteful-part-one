@@ -1,6 +1,6 @@
 import React from 'react'
 import StateContext from '../StateContext'
-
+import PropTypes from 'prop-types'
 
 class NotesExpanded extends React.Component {
     static contextType = StateContext
@@ -18,6 +18,22 @@ class NotesExpanded extends React.Component {
                     </li>
             })
     }
+}
+
+NotesExpanded.propTypes = {
+    deleteNote: PropTypes.func.isRequired,
+    notes: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.string,
+        name: PropTypes.string,
+        modified: PropTypes.string,
+        folderId: PropTypes.string,
+        content: PropTypes.string
+    })).isRequired,
+    handleDeleteNote: PropTypes.func.isRequired
+}
+
+NotesExpanded.defaultProps = {
+    notes: [ {} ]
 }
 
 export default NotesExpanded

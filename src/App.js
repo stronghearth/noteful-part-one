@@ -1,11 +1,12 @@
 import React from 'react';
 import './App.css';
+import { Route } from 'react-router-dom';
+import StateContext from './StateContext';
+import AppError from './AppError';
 import Header from './header/Header';
 import Main from './main/Main';
 import Sidebar from './sidebar/Sidebar';
-import { Route } from 'react-router-dom';
-import StateContext from './StateContext';
-import AppError from './AppError'
+
 
 class App extends React.Component {
   state = {

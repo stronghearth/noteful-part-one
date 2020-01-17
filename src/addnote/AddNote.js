@@ -1,7 +1,9 @@
 import React from 'react';
-import ValidationError from '../ValidationError'
-import StateContext from '../StateContext'
-import "./addnote.css"
+import ValidationError from '../ValidationError';
+import StateContext from '../StateContext';
+import PropTypes from 'prop-types';
+import "./addnote.css";
+
 export default class AddNote extends React.Component {
     static contextType = StateContext;
 
@@ -35,4 +37,10 @@ export default class AddNote extends React.Component {
         </form>
         )
     }
+}
+
+AddNote.propTypes = {
+    handleNoteFormDesc: PropTypes.func,
+    handleNoteFormName: PropTypes.func,
+    handleNoteSubmit: PropTypes.func
 }

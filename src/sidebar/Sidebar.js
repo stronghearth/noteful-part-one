@@ -1,8 +1,9 @@
-import React from 'react'
-import './sidebar.css'
-import NavFolders from '../navfolders/NavFolders'
-import NotesNav from '../notesnav/NotesNav'
-import StateContext from '../StateContext'
+import React from 'react';
+import './sidebar.css';
+import StateContext from '../StateContext';
+import PropTypes from 'prop-types';
+import NavFolders from '../navfolders/NavFolders';
+import NotesNav from '../notesnav/NotesNav';
 import AddFolder from '../addfolder/AddFolder'
 
 class Sidebar extends React.Component{
@@ -54,6 +55,14 @@ class Sidebar extends React.Component{
             return <NotesNav {...this.props}/>
         }
     }
+}
+
+Sidebar.propTypes = {
+    error: PropTypes.string
+}
+
+Sidebar.defaultProps = {
+    error: null
 }
 
 export default Sidebar

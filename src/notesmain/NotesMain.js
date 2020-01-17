@@ -1,6 +1,7 @@
 import React from 'react';
-import {NavLink} from 'react-router-dom'
-import StateContext from '../StateContext'
+import {NavLink} from 'react-router-dom';
+import PropTypes from 'prop-types';
+import StateContext from '../StateContext';
 
 
 class NotesMain extends React.Component {
@@ -32,4 +33,19 @@ class NotesMain extends React.Component {
     }
 }
 
+NotesMain.propTypes = {
+    deleteNote: PropTypes.func,
+    notes: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.string,
+        name: PropTypes.string,
+        modified: PropTypes.string,
+        folderId: PropTypes.string,
+        content: PropTypes.string
+    })).isRequired,
+    handleDeleteNote: PropTypes.func.isRequired
+}
+
+NotesMain.defaultProps = {
+    notes: [ {} ]
+}
 export default NotesMain

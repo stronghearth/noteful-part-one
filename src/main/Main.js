@@ -1,8 +1,9 @@
 import React from 'react'
 import './main.css'
+import StateContext from '../StateContext'
+import PropTypes from 'prop-types'
 import NotesMain from '../notesmain/NotesMain'
 import NotesExpanded from '../notesexpanded/NotesExpanded'
-import StateContext from '../StateContext'
 import AddNote from '../addnote/AddNote'
 
 class Main extends React.Component {
@@ -85,6 +86,13 @@ class Main extends React.Component {
                     </main>
         }
     }
+    
+}
+
+Main.propTypes = {
+    error: PropTypes.string,
+    pathname: PropTypes.string,
+    folderid: PropTypes.string
 }
 
 export default Main
