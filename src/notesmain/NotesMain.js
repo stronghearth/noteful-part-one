@@ -2,6 +2,7 @@ import React from 'react';
 import {NavLink} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import StateContext from '../StateContext';
+import './notesmain.css';
 
 
 class NotesMain extends React.Component {
@@ -13,7 +14,7 @@ class NotesMain extends React.Component {
         if (this.props.location.pathname === "/" ) {
             return notes.map(note => {
                 return <li key={note.id}>
-                            <NavLink to={`/note/${note.id}`}>{note.name}</NavLink>
+                            <NavLink to={`/note/${note.id}`} className="noteLink">{note.name}</NavLink>
                             <p>Date Modified: {note.modified}</p>
                             <button key={note.id} type='button' onClick={ () => this.props.handleDeleteNote(note.id, deleteNote)}>Delete</button>
                         </li>
@@ -24,7 +25,7 @@ class NotesMain extends React.Component {
             const newNotes = notes.filter(note => note.folderId === currentFolder);
             return newNotes.map(note => {
                 return <li key={note.id}>
-                            <NavLink to={`/note/${note.id}`}>{note.name}</NavLink>
+                            <NavLink to={`/note/${note.id}`} className="noteLink">{note.name}</NavLink>
                             <p>Date Modified: {note.modified}</p>
                             <button key={note.id} type='button' onClick={ () => this.props.handleDeleteNote(note.id, deleteNote)}>Delete</button>
                         </li>

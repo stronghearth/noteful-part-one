@@ -196,12 +196,13 @@ handleFolderName = (name) => {
                     error: this.state.error,
                     note: this.state.note,
                     deleteNote: this.deleteNote,
+                    folderName: this.state.folderName,
                     handleNoteFormName: this.handleNoteFormName,
                     handleNoteFormDesc: this.handleNoteFormDesc,
                     handleNoteSubmit: this.handleNoteSubmit,
                     handleFolderName: this.handleFolderName,
                     handleFolderFormSubmit: this.handleFolderFormSubmit
-                     }}>
+                  }}>
                   
                       <Route 
                         exact

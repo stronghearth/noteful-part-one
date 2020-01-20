@@ -10,3 +10,13 @@ li {
     padding: 5px;
     margin-bottom: 10px;
 }
+
+li.folderNav {
+    text-align: center;
+}
+
+li > a.active {
+   text-decoration: underline;
+   font-weight: bolder;
+   color: #7B21AF;
+}

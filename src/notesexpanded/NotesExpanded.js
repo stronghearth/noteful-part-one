@@ -21,7 +21,7 @@ class NotesExpanded extends React.Component {
 }
 
 NotesExpanded.propTypes = {
-    deleteNote: PropTypes.func.isRequired,
+    deleteNote: PropTypes.func,
     notes: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.string,
         name: PropTypes.string,

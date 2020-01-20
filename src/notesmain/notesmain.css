@@ -1,0 +1,8 @@
+li > .noteLink {
+    text-decoration: underline;
+}
+
+li > .noteLink:hover {
+    text-decoration: none;
+    font-weight: bolder;
+}

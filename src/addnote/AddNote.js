@@ -7,9 +7,22 @@ import "./addnote.css";
 export default class AddNote extends React.Component {
     static contextType = StateContext;
 
+    constructor(props) {
+        super(props)
+        this.state = {
+            touched: false
+        }
+    }
+
+    nameUpdated() {
+        this.setState({
+            touched: true
+        })
+    }
+
     validateName() {
         const name = this.context.note.name;
-        if (name === "") {
+        if (name === "" && this.state.touched) {
             return "Name is required";
         }
         else {
@@ -25,14 +38,14 @@ export default class AddNote extends React.Component {
             <fieldset>
                 <legend>Add Note: </legend>
                 <label htmlFor="name">Note Name: </label>
-                <input type="text" name="name" onChange={(e) => handleNoteFormName(e.currentTarget.value)}/>
+                <input type="text" name="name" onChange={(e) => {handleNoteFormName(e.currentTarget.value); this.nameUpdated()}}/>
                 <br/>
                 {<ValidationError message={this.validateName()}/>}
                 <br/>
                 <label htmlFor="description">Note Description: </label>
                 <textarea name="description" className="textarea" onChange={(e) => handleNoteFormDesc(e.currentTarget.value)}/>
                 <br />
-                <button type="submit">Submit</button>
+                <button type="submit" disabled={this.validateName()}>Submit</button>
             </fieldset>
         </form>
         )
