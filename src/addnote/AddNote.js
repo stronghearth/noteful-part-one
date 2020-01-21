@@ -10,7 +10,8 @@ export default class AddNote extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            touched: false
+            touched: false,
+            folderId: ""
         }
     }
 
@@ -20,9 +21,15 @@ export default class AddNote extends React.Component {
         })
     }
 
+    handleFolderChoice(e) {
+        this.setState({
+            folderId: e.target.value
+        })
+    }
+
     validateName() {
         const name = this.context.note.name;
-        if (name === "" && this.state.touched) {
+        if (name === "") {
             return "Name is required";
         }
         else {
@@ -31,16 +38,24 @@ export default class AddNote extends React.Component {
     }
 
     render() {
-        const {handleNoteFormDesc, handleNoteFormName, handleNoteSubmit} = this.context;
-        
+        const {handleNoteFormDesc, handleNoteFormName, handleNoteSubmit, folders} = this.context;
+        const folderOptions = folders.map(folder => {
+            return <option key={folder.id} value={folder.id}>{folder.name}</option>
+        })
         return (
-        <form className="addNote" onSubmit={(e) => handleNoteSubmit(e, this.props.match.params.folderid, new Date().toLocaleString())}>
+        <form className="addNote" onSubmit={(e) => handleNoteSubmit(e, this.state.folderId, new Date().toLocaleString())}>
             <fieldset>
                 <legend>Add Note: </legend>
                 <label htmlFor="name">Note Name: </label>
                 <input type="text" name="name" onChange={(e) => {handleNoteFormName(e.currentTarget.value); this.nameUpdated()}}/>
                 <br/>
-                {<ValidationError message={this.validateName()}/>}
+                {this.state.touched && <ValidationError message={this.validateName()}/>}
+                
+                <label htmlFor="folder">Folder: </label>
+                <select name="folder" onChange={(e)=> {this.handleFolderChoice(e)}}>
+                    {folderOptions}
+                </select>
+
                 <br/>
                 <label htmlFor="description">Note Description: </label>
                 <textarea name="description" className="textarea" onChange={(e) => handleNoteFormDesc(e.currentTarget.value)}/>

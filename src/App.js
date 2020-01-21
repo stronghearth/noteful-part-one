@@ -207,10 +207,7 @@ handleFolderName = (name) => {
                       <Route 
                         exact
                         path ="/" 
-                        
-                        render={props => <Sidebar 
-                        location= {props.location.pathname}
-                        folderid= {props.match.params.folderid}/>}
+                        render={props => <Sidebar {...props}/>}
                       />
                       <Route
                         exact

@@ -40,7 +40,7 @@ class Sidebar extends React.Component{
         if (error !== null){
             return <p className="errorMessage">An error has occured: {error}</p>
         }
-        else if (this.props.location === '/' || this.props.folderid)  {
+        else if (this.props.location.pathname === '/' || this.props.match.params.folderid)  {
             return <nav className="sidebar">
                         <ul>
                             <NavFolders 
