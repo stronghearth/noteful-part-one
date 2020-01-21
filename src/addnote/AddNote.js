@@ -45,12 +45,13 @@ export default class AddNote extends React.Component {
         return (
         <form className="addNote" onSubmit={(e) => handleNoteSubmit(e, this.state.folderId, new Date().toLocaleString())}>
             <fieldset>
-                <legend>Add Note: </legend>
+                <legend>Add Note </legend>
+
                 <label htmlFor="name">Note Name: </label>
                 <input type="text" name="name" onChange={(e) => {handleNoteFormName(e.currentTarget.value); this.nameUpdated()}}/>
-                <br/>
                 {this.state.touched && <ValidationError message={this.validateName()}/>}
-                
+                <br/>
+
                 <label htmlFor="folder">Folder: </label>
                 <select name="folder" onChange={(e)=> {this.handleFolderChoice(e)}}>
                     {folderOptions}
