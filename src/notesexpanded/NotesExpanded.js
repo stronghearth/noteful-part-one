@@ -26,7 +26,7 @@ NotesExpanded.propTypes = {
         id: PropTypes.string,
         name: PropTypes.string,
         modified: PropTypes.string,
-        folderId: PropTypes.string,
+        folderid: PropTypes.string,
         content: PropTypes.string
     })).isRequired,
     handleDeleteNote: PropTypes.func.isRequired

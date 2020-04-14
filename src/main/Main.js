@@ -1,5 +1,6 @@
 import React from 'react'
 import './main.css'
+import config from '../config'
 import StateContext from '../StateContext'
 import PropTypes from 'prop-types'
 import NotesMain from '../notesmain/NotesMain'
@@ -14,7 +15,7 @@ class Main extends React.Component {
     }
     
     handleDeleteNote = (noteId, callback) => {
-        fetch(`http://localhost:9090/notes/${noteId}`, {
+        fetch(`${config.API_ENDPOINT}/notes/${noteId}`, {
             method: 'DELETE',
             headers: {
                   'content-type': 'application/json'

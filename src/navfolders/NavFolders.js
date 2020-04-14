@@ -8,9 +8,9 @@ class NavFolders extends React.Component {
     render() {
         const {folders} = this.context
         return folders.map(folder => {
-            const folderId = this.props.match.params.folderid 
+            const folderid = this.props.match.params.folderid 
             return <li key={folder.id} className="folderNav">
-                        <NavLink activeClassName= {folderId === folder.id ? "active" : "" } to={`/folder/${folder.id}`}>{folder.name}</NavLink>
+                        <NavLink activeClassName= {folderid === folder.id ? "active" : "" } to={`/folder/${folder.id}`}>{folder.name}</NavLink>
                     </li>
         })
     }

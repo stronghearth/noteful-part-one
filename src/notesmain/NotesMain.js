@@ -22,7 +22,7 @@ class NotesMain extends React.Component {
         }
         else {
             const currentFolder = this.props.match.params.folderid;
-            const newNotes = notes.filter(note => note.folderId === currentFolder);
+            const newNotes = notes.filter(note => note.folderid === currentFolder);
             return newNotes.map(note => {
                 return <li key={note.id}>
                             <NavLink to={`/note/${note.id}`} className="noteLink">{note.name}</NavLink>
@@ -40,7 +40,7 @@ NotesMain.propTypes = {
         id: PropTypes.string,
         name: PropTypes.string,
         modified: PropTypes.string,
-        folderId: PropTypes.string,
+        folderid: PropTypes.string,
         content: PropTypes.string
     })).isRequired,
     handleDeleteNote: PropTypes.func.isRequired
