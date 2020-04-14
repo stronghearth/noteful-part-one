@@ -28,7 +28,7 @@ class App extends React.Component {
                       />
                       <Route
                         exact
-                        path="/folder/:folderid"
+                        path="/folder/:folderId"
                         render={props => <Sidebar {...props} />}
                       />
                       <Route
@@ -43,7 +43,7 @@ class App extends React.Component {
                       />
                       <Route 
                         exact
-                        path="/folder/:folderid"
+                        path="/folder/:folderId"
                         render={props => <Main {...props}/>}
                       />
                       <Route

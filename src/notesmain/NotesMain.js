@@ -27,7 +27,9 @@ class NotesMain extends React.Component {
             })
         }
         else {
+
             const newNotes = notes.filter(note => note.folder_id === folder.id)
+
             return newNotes.map(note => {
                 return <li key={note.id}>
                             <NavLink to={`/note/${note.id}`} className="noteLink">{note.name}</NavLink>

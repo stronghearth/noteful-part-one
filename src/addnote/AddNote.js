@@ -15,6 +15,7 @@ export default class AddNote extends React.Component {
             name: '',
             content: '',
             error: null
+
         }
     }
 
@@ -81,7 +82,8 @@ export default class AddNote extends React.Component {
             return <option key={folder.id} value={folder.id}>{folder.name}</option>
         })
         return (
-        <form className="addNote" onSubmit={(e) => this.handleNoteSubmit(e)}>
+
+<form className="addNote" onSubmit={(e) => this.handleNoteSubmit(e)}>
             <fieldset>
                 <legend>Add Note </legend>
 
