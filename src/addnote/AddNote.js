@@ -11,7 +11,11 @@ export default class AddNote extends React.Component {
         super(props)
         this.state = {
             touched: false,
-            folder_id: ""
+            folderid: '',
+            name: '',
+            content: '',
+            error: null
+
         }
     }
 
@@ -22,9 +26,26 @@ export default class AddNote extends React.Component {
     }
 
     handleFolderChoice(e) {
+        const {value} = e.target
         this.setState({
-            folder_id: e.target.value
+            folderid: value
         })
+    }
+
+    handleNoteFormName(e) {
+        const { value } = e.target
+        this.setState({
+            name: value
+        })
+
+    }
+
+    handleNoteFormDesc(e) {
+        const { value } = e.target
+        this.setState({
+            content: value
+        })
+
     }
 
     validateName() {
@@ -37,29 +58,50 @@ export default class AddNote extends React.Component {
         }
     }
 
+    handleNoteSubmit(e) {
+        e.preventDefault()
+        if (isNaN(this.state.folderid)) {
+            this.setState({
+                error: 'Please select a folder'
+            })
+        } else {
+        const newNote = {
+            name: this.state.name,
+            content: this.state.content,
+            folder_id: this.state.folderid,
+        }
+            this.context.addNote(newNote)
+            this.props.close(e)
+        }
+    }
+
     render() {
-        const {handleNoteFormDesc, handleNoteFormName, handleNoteSubmit, folders} = this.context;
+        const {folders} = this.context;
+        const {error} = this.state;
         const folderOptions = folders.map(folder => {
             return <option key={folder.id} value={folder.id}>{folder.name}</option>
         })
         return (
-        <form className="addNote" onSubmit={(e) => handleNoteSubmit(e, this.state.folder_id, new Date().toLocaleString())}>
+
+<form className="addNote" onSubmit={(e) => this.handleNoteSubmit(e)}>
             <fieldset>
                 <legend>Add Note </legend>
 
                 <label htmlFor="name">Note Name: </label>
-                <input type="text" name="name" onChange={(e) => {handleNoteFormName(e.currentTarget.value); this.nameUpdated()}}/>
+                <input type="text" name="name" onChange={(e) => {this.handleNoteFormName(e); this.nameUpdated()}}/>
+                {error && <p>{error}</p>}
                 {this.state.touched && <ValidationError message={this.validateName()}/>}
                 <br/>
 
                 <label htmlFor="folder">Folder: </label>
                 <select name="folder" onChange={(e)=> {this.handleFolderChoice(e)}}>
+                    <option value="Choose Folder">Choose Folder</option>
                     {folderOptions}
                 </select>
 
                 <br/>
                 <label htmlFor="description">Note Description: </label>
-                <textarea name="description" className="textarea" onChange={(e) => handleNoteFormDesc(e.currentTarget.value)}/>
+                <textarea name="description" className="textarea" onChange={(e) => this.handleNoteFormDesc(e)}/>
                 <br />
                 <button type="submit" disabled={this.validateName()}>Submit</button>
             </fieldset>

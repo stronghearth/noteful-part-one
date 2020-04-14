@@ -10,7 +10,8 @@ export default class AddFolder extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            touched: false
+            touched: false,
+            folderName: ''
         }
     }
 
@@ -20,8 +21,15 @@ export default class AddFolder extends React.Component {
         })
     }
 
+    handleFolderName(e) {
+        const {value} = e.target;
+        this.setState({
+            folderName: value
+        })
+    }
+
     validateName() {
-        const name = this.context.folderName;
+        const name = this.state.folderName;
         
         if (name === "" || name.name === "" ) {
             return "Name is required";
@@ -31,13 +39,18 @@ export default class AddFolder extends React.Component {
         }
     }
 
+    handleFolderFormSubmit(e) {
+        e.preventDefault()
+        const newFolder = {name: this.state.folderName}
+        this.context.addFolder(newFolder)
+    }
     render() {
-        const {handleFolderFormSubmit, handleFolderName} = this.context;
+        
         return (
-            <form className="addFolder" onSubmit={(e) => handleFolderFormSubmit(e)}>
+            <form className="addFolder" onSubmit={(e) => this.handleFolderFormSubmit(e)}>
                 <fieldset>
                     <legend>Add Folder</legend>
-                    <input type="text" name="name" onChange={(e) => {handleFolderName(e.currentTarget.value); this.nameUpdated()}} placeholder="Name your folder"/>
+                    <input type="text" name="name" onChange={(e) => {this.handleFolderName(e); this.nameUpdated()}} placeholder="Name your folder"/>
                     {this.state.touched && <ValidationError message={this.validateName()}/>}
                     <br/>
                     <button type="submit" disabled={this.validateName()}>Submit</button>

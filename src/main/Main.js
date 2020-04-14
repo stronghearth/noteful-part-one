@@ -1,5 +1,6 @@
 import React from 'react'
 import './main.css'
+import config from '../config'
 import StateContext from '../StateContext'
 import PropTypes from 'prop-types'
 import NotesMain from '../notesmain/NotesMain'
@@ -14,26 +15,8 @@ class Main extends React.Component {
         formOpen: false
     }
     
-    handleDeleteNote = (noteId, callback) => {
-        fetch(`${config.API_ENDPOINT}/notes/${noteId}`, {
-            method: 'DELETE',
-            headers: {
-                  'content-type': 'application/json'
-            },
-        })
-        .then(res => {
-            if (!res.ok){
-                throw new Error(res.statusText);
-            } 
-            return res.json()
-        })
-        .then(res => {
-            this.props.history.push('/');
-            callback(noteId);
-        })
-        .catch(err => {
-            this.props.error = err.message;
-        })
+    handleDeleteNote = (noteId) => {
+        this.context.deleteNote(noteId)
     }
 
     handleOpen = (e) => {
@@ -54,7 +37,7 @@ class Main extends React.Component {
         if (this.state.formOpen) {
             return (
                 <>
-                <AddNote {...this.props}/>
+                <AddNote {...this.props} close={this.handleClose}/>
                 <button onClick={(e) => this.handleClose(e)}>Close</button>
                 </>
             )

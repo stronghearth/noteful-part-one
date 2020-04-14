@@ -8,26 +8,33 @@ import './notesmain.css';
 class NotesMain extends React.Component {
   static contextType = StateContext;
 
+  componentDidMount() {
+      if(this.props.match.params.folderid){
+            this.context.fetchFolder(this.props.match.params.folderid)
+      }
+  }
+
     render() {
-        const {deleteNote, notes} = this.context;
+        const {notes, folder} = this.context;
 
         if (this.props.location.pathname === "/" ) {
             return notes.map(note => {
                 return <li key={note.id}>
                             <NavLink to={`/note/${note.id}`} className="noteLink">{note.name}</NavLink>
                             <p>Date Modified: {note.modified}</p>
-                            <button key={note.id} type='button' onClick={ () => this.props.handleDeleteNote(note.id, deleteNote)}>Delete</button>
+                            <button key={note.id} type='button' onClick={ () => this.props.handleDeleteNote(note.id)}>Delete</button>
                         </li>
             })
         }
         else {
-            // const currentFolder = this.props.match.params.folderId;
-            const newNotes = notes.filter(note => note.folder_Id === this.props.match.params.folderId);
+
+            const newNotes = notes.filter(note => note.folder_id === folder.id)
+
             return newNotes.map(note => {
                 return <li key={note.id}>
                             <NavLink to={`/note/${note.id}`} className="noteLink">{note.name}</NavLink>
                             <p>Date Modified: {note.modified}</p>
-                            <button key={note.id} type='button' onClick={ () => this.props.handleDeleteNote(note.id, deleteNote)}>Delete</button>
+                            <button key={note.id} type='button' onClick={ () => this.props.handleDeleteNote(note.id)}>Delete</button>
                         </li>
             })
         }
@@ -40,7 +47,7 @@ NotesMain.propTypes = {
         id: PropTypes.string,
         name: PropTypes.string,
         modified: PropTypes.string,
-        folderId: PropTypes.string,
+        folderid: PropTypes.string,
         content: PropTypes.string
     })).isRequired,
     handleDeleteNote: PropTypes.func.isRequired
