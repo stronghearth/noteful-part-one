@@ -54,7 +54,7 @@ class Main extends React.Component {
         if (this.state.formOpen) {
             return (
                 <>
-                <AddNote {...this.props}/>
+                <AddNote {...this.props} close={this.handleClose}/>
                 <button onClick={(e) => this.handleClose(e)}>Close</button>
                 </>
             )
@@ -66,7 +66,7 @@ class Main extends React.Component {
         const {error} = this.context
         if (error !== null) {
             return <main>
-                    <p className="errorMessage">An error has occurred: {error}</p>
+                    <p className="errorMessage">An error has occurred: {error.message}</p>
                 </main>
         }
         else if (this.props.location.pathname === '/' || this.props.match.params.folderid){

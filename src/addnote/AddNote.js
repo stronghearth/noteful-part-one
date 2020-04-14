@@ -13,7 +13,8 @@ export default class AddNote extends React.Component {
             touched: false,
             folderid: '',
             name: '',
-            content: ''
+            content: '',
+            error: null
         }
     }
 
@@ -58,16 +59,24 @@ export default class AddNote extends React.Component {
 
     handleNoteSubmit(e) {
         e.preventDefault()
+        if (isNaN(this.state.folderid)) {
+            this.setState({
+                error: 'Please select a folder'
+            })
+        } else {
         const newNote = {
             name: this.state.name,
             content: this.state.content,
             folderid: this.state.folderid,
         }
-        this.context.addNote(newNote)
+            this.context.addNote(newNote)
+            this.props.close(e)
+        }
     }
 
     render() {
         const {folders} = this.context;
+        const {error} = this.state;
         const folderOptions = folders.map(folder => {
             return <option key={folder.id} value={folder.id}>{folder.name}</option>
         })
@@ -78,6 +87,7 @@ export default class AddNote extends React.Component {
 
                 <label htmlFor="name">Note Name: </label>
                 <input type="text" name="name" onChange={(e) => {this.handleNoteFormName(e); this.nameUpdated()}}/>
+                {error && <p>{error}</p>}
                 {this.state.touched && <ValidationError message={this.validateName()}/>}
                 <br/>
 

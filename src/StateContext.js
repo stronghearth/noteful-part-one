@@ -87,10 +87,13 @@ export class StateProvider extends Component {
 
     addNote = (newNote) => {
         ApiService.postNote(newNote)
-        .then(
-            this.setState({
-                ...this.state.notes.push(newNote)
-            })
+        .then( res => 
+            ApiService.getNoteById(res.id)
+            .then(note => {
+                this.setState({
+                    ...this.state.notes.push(note)
+                })
+            })   
         )
         .catch(error => {
             this.setState({
