@@ -6,6 +6,7 @@ import AppError from './AppError';
 import Header from './header/Header';
 import Main from './main/Main';
 import Sidebar from './sidebar/Sidebar';
+import config from './config'
 
 
 class App extends React.Component {
@@ -15,7 +16,7 @@ class App extends React.Component {
     note: {
       name: "",
       content: "",
-      folderId: ""
+      folder_id: ""
     },
     folderName: "",
     error: null
@@ -63,7 +64,7 @@ class App extends React.Component {
 
     const newNote = JSON.stringify(submittedNote);
 
-    fetch('http://localhost:9090/notes', {
+    fetch(`${config.API_ENDPOINT}/notes`, {
         method: 'POST',
         headers: {
           'content-type': 'application/json'
@@ -106,7 +107,7 @@ handleFolderName = (name) => {
 
     e.preventDefault()
 
-    fetch('http://localhost:9090/folders', {
+    fetch(`${config.API_ENDPOINT}/folders`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
@@ -134,7 +135,7 @@ handleFolderName = (name) => {
 //Base GET requests called in componentDidMount
 
   getFolders = () => {
-    fetch('http://localhost:9090/folders', {
+    fetch(`${config.API_ENDPOINT}/folders`, {
       method: 'GET',
       headers: {
         'content-type': 'application/json'
@@ -157,7 +158,7 @@ handleFolderName = (name) => {
   }
 
   getNotes = () => {
-    fetch('http://localhost:9090/notes', {
+    fetch(`${config.API_ENDPOINT}/notes`, {
       method: 'GET',
       headers: {
         'content-type': 'application/json'
@@ -211,7 +212,7 @@ handleFolderName = (name) => {
                       />
                       <Route
                         exact
-                        path="/folder/:folderid"
+                        path="/folder/:folderId"
                         render={props => <Sidebar {...props} />}
                       />
                       <Route
@@ -226,7 +227,7 @@ handleFolderName = (name) => {
                       />
                       <Route 
                         exact
-                        path="/folder/:folderid"
+                        path="/folder/:folderId"
                         render={props => <Main {...props}/>}
                       />
                       <Route

@@ -11,7 +11,7 @@ export default class AddNote extends React.Component {
         super(props)
         this.state = {
             touched: false,
-            folderId: ""
+            folder_id: ""
         }
     }
 
@@ -23,7 +23,7 @@ export default class AddNote extends React.Component {
 
     handleFolderChoice(e) {
         this.setState({
-            folderId: e.target.value
+            folder_id: e.target.value
         })
     }
 
@@ -43,7 +43,7 @@ export default class AddNote extends React.Component {
             return <option key={folder.id} value={folder.id}>{folder.name}</option>
         })
         return (
-        <form className="addNote" onSubmit={(e) => handleNoteSubmit(e, this.state.folderId, new Date().toLocaleString())}>
+        <form className="addNote" onSubmit={(e) => handleNoteSubmit(e, this.state.folder_id, new Date().toLocaleString())}>
             <fieldset>
                 <legend>Add Note </legend>
 

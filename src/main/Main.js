@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import NotesMain from '../notesmain/NotesMain'
 import NotesExpanded from '../notesexpanded/NotesExpanded'
 import AddNote from '../addnote/AddNote'
+import config from '../config'
 
 class Main extends React.Component {
     static contextType = StateContext;
@@ -14,7 +15,7 @@ class Main extends React.Component {
     }
     
     handleDeleteNote = (noteId, callback) => {
-        fetch(`http://localhost:9090/notes/${noteId}`, {
+        fetch(`${config.API_ENDPOINT}/notes/${noteId}`, {
             method: 'DELETE',
             headers: {
                   'content-type': 'application/json'
@@ -68,7 +69,7 @@ class Main extends React.Component {
                     <p className="errorMessage">An error has occurred: {error}</p>
                 </main>
         }
-        else if (this.props.location.pathname === '/' || this.props.match.params.folderid){
+        else if (this.props.location.pathname === '/' || this.props.match.params.folderId){
         return <main>
                 <nav className="mainNav">
                     <ul>
@@ -92,7 +93,7 @@ class Main extends React.Component {
 Main.propTypes = {
     error: PropTypes.string,
     pathname: PropTypes.string,
-    folderid: PropTypes.string
+    folderId: PropTypes.string
 }
 
 export default Main
