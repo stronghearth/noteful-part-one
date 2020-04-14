@@ -67,7 +67,7 @@ export default class AddNote extends React.Component {
         const newNote = {
             name: this.state.name,
             content: this.state.content,
-            folderid: this.state.folderid,
+            folder_id: this.state.folderid,
         }
             this.context.addNote(newNote)
             this.props.close(e)

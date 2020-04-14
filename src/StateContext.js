@@ -8,6 +8,7 @@ const StateContext = React.createContext({
     note: {},
     error: null,
     fetchFolders: () => {},
+    fetchFolder: () => {},
     fetchNotes: () => {},
     fetchNote: () => {},
     addFolder: () => {},
@@ -34,6 +35,20 @@ export class StateProvider extends Component {
             .then(res => {
                 this.setState({
                     folders: res
+                })
+            })
+            .catch(error => {
+                this.setState({
+                    error: error.message
+                })
+            })
+    }
+
+    fetchFolder = (folderId) => {
+        ApiService.getFolder(folderId)
+            .then(res => {
+                this.setState({
+                    folder: res
                 })
             })
             .catch(error => {
@@ -73,10 +88,13 @@ export class StateProvider extends Component {
 
     addFolder = (newFolder) => {
         ApiService.postFolder(newFolder) 
-        .then(
-            this.setState({
-                ...this.state.folders.push(newFolder)
-            })
+        .then( res =>
+            ApiService.getFolder(res.id)
+            .then(folder => {
+                this.setState({
+                    ...this.state.folders.push(folder)
+                })
+            }) 
         )
         .catch(error => {
             this.setState({
@@ -118,6 +136,7 @@ export class StateProvider extends Component {
             note: this.state.note,
             error: this.state.error,
             fetchFolders: this.fetchFolders,
+            fetchFolder: this.fetchFolder,
             fetchNotes: this.fetchNotes,
             fetchNote: this.fetchNote,
             addFolder: this.addFolder,

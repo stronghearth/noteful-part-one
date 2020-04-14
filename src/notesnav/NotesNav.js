@@ -6,9 +6,8 @@ import PropTypes from 'prop-types';
 class NotesNav extends React.Component {
     static contextType = StateContext;
     render() {
-        const {folders, notes} = this.context;
-        const currentNote = notes.find(note => this.props.match.params.noteid === note.id) || {}
-        const currentFolder = folders.find(folder => currentNote.folderid === folder.id) || {}
+        const {folders, note} = this.context;
+        const currentFolder = folders.find(folder => note.folder_id === folder.id) || {}
         
         return <li className="openNoteFolder">
                     <p>{currentFolder.name}</p>

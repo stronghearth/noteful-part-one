@@ -14,26 +14,8 @@ class Main extends React.Component {
         formOpen: false
     }
     
-    handleDeleteNote = (noteId, callback) => {
-        fetch(`${config.API_ENDPOINT}/notes/${noteId}`, {
-            method: 'DELETE',
-            headers: {
-                  'content-type': 'application/json'
-            },
-        })
-        .then(res => {
-            if (!res.ok){
-                throw new Error(res.statusText);
-            } 
-            return res.json()
-        })
-        .then(res => {
-            this.props.history.push('/');
-            callback(noteId);
-        })
-        .catch(err => {
-            this.props.error = err.message;
-        })
+    handleDeleteNote = (noteId) => {
+        this.context.deleteNote(noteId)
     }
 
     handleOpen = (e) => {
@@ -66,7 +48,7 @@ class Main extends React.Component {
         const {error} = this.context
         if (error !== null) {
             return <main>
-                    <p className="errorMessage">An error has occurred: {error.message}</p>
+                    <p className="errorMessage">An error has occurred: {error}</p>
                 </main>
         }
         else if (this.props.location.pathname === '/' || this.props.match.params.folderid){

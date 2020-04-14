@@ -12,6 +12,17 @@ const ApiService = {
             ? Promise.resolve(res.json())
             : Promise.reject('Cannot get folders'))
     },
+    getFolder: (folderId) => {
+        return fetch(`${config.API_ENDPOINT}/folders/${folderId}`, {
+            method: 'GET',
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+        .then(res => res.ok
+            ? Promise.resolve(res.json())
+            : Promise.reject('Cannot get folder'))
+    },
     postFolder : (newFolder) => {
         return fetch(`${config.API_ENDPOINT}/folders`, {
             method: 'POST',
@@ -62,17 +73,19 @@ const ApiService = {
             ? Promise.resolve(res.json())
             : Promise.reject('Cannot retrieve note'))
     },
-    deleteNote: (noteId) => {
-        return fetch(`${config.API_ENDPOINT}/notes/${noteId}`, {
+    deleteNote: (id) => {
+        return fetch(`${config.API_ENDPOINT}/notes/${id}`, {
             method: 'DELETE',
             headers: {
                 'content-type': 'application/json'
             }
         })
-        .then(res => res.ok
-            ? Promise.resolve(res.json())
-            : Promise.reject('Cannot delete note'))
-    }
+        .then(res => {
+            if(!res.ok) {
+                throw new Error(res.statusText)
+            }
+        })
+}
 }
 
 export default ApiService
