@@ -9,13 +9,18 @@ class NotesExpanded extends React.Component {
         const noteToFind = this.props.match.params.noteid
         this.context.fetchNote(noteToFind)
     }
+
+    handleExpandedDeleteNote(noteId) {
+        this.props.handleDeleteNote(noteId)
+        this.props.history.push('/')
+    }
     render() {
-        const {note, deleteNote} = this.context;
+        const {note} = this.context;
             return <li key={note.id}>
                         <h2>{note.name}</h2>
                         <h4>Date Modified: {note.modified}</h4>
                         <p>{note.content}</p>
-                        <button key={note.id} type='button' onClick={() => this.props.handleDeleteNote(note.id, deleteNote)}>Delete</button>
+                        <button key={note.id} type='button' onClick={() => this.handleExpandedDeleteNote(note.id)}>Delete</button>
                     </li>
     }
 }

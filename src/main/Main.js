@@ -1,12 +1,11 @@
 import React from 'react'
 import './main.css'
-import config from '../config'
 import StateContext from '../StateContext'
 import PropTypes from 'prop-types'
 import NotesMain from '../notesmain/NotesMain'
 import NotesExpanded from '../notesexpanded/NotesExpanded'
 import AddNote from '../addnote/AddNote'
-import config from '../config'
+
 
 class Main extends React.Component {
     static contextType = StateContext;
